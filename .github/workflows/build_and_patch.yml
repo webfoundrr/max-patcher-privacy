@@ -42,7 +42,7 @@ jobs:
       run: python scripts/patcher.py
 
     - name: Rebuild APK
-      run: apktool b apk_workdir -o rebuilt_unsigned.apk
+      run: apktool b apk_workdir -c -o rebuilt_unsigned.apk
 
     - name: Zipalign the APK
       run: zipalign -v 4 rebuilt_unsigned.apk rebuilt_aligned.apk

@@ -1,0 +1,18 @@
+.method public a(Ljava/lang/String;)Lcom/my/tracker/obfuscated/c0$b;
+    .locals 2
+    .param p1, "s"    # Ljava/lang/String;
+
+    .prologue
+    .line 1
+    invoke-static {}, Lcom/my/tracker/obfuscated/c0$b;->c()Lcom/my/tracker/obfuscated/c0$b;
+
+    move-result-object v0
+
+    .line 2
+    const/4 v1, 0x1
+
+    iput-boolean v1, v0, Lcom/my/tracker/obfuscated/c0$b;->a:Z
+
+    .line 3
+    return-object v0
+.end method

@@ -1,4 +1,4 @@
-# max-patcher-privacy - Патч для приватности
+<img width="922" height="732" alt="2" src="https://github.com/user-attachments/assets/33ad225b-93b8-48a1-869b-61e50e1517f9" /># max-patcher-privacy - Патч для приватности
 
 Этот проект содержит автоматизированный патч для удаления шпионского SDK `my.tracker` (возможно и другие) из приложения max.
 
@@ -27,13 +27,20 @@
 
 ## Доказательства
 
-Я приложу скриншоты из JEB Pro, которые показывают код до и после применения патча на примере одного из методов. Это наглядно демонстрирует, как опасный код заменяется на  "пустышку".
+Я приложу скриншоты из JEB Pro, которые показывают код до и после применения патча на примере методов. Это наглядно демонстрирует, как опасный код заменяется на "пустышку".
 
-**До (Оригинальный код `setCustomUserId`):**
-
+**До (Оригинальный код `MyTrackerParams`):**
+<img width="815" height="681" alt="1" src="https://github.com/user-attachments/assets/b652ac3e-9a76-47db-a669-70664df7c543" />
 
 **После (Код после патча):**
+<img width="922" height="732" alt="2" src="https://github.com/user-attachments/assets/04bc0397-5158-4620-ace4-eb2616e56d4e" />
 
+2.
+**До (Оригинальный код `b0.smali (HttpURLConnection)`):**
+<img width="1116" height="753" alt="3" src="https://github.com/user-attachments/assets/835990d8-f586-47bb-af25-01b3a29e7394" />
+
+**После (Код после патча):**
+<img width="761" height="743" alt="4" src="https://github.com/user-attachments/assets/e9674a73-2511-453f-8549-595af7ad0931" />
 
 ## Как собрать APK самостоятельно
 

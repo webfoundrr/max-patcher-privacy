@@ -26,9 +26,9 @@ jobs:
         sudo chmod +x /usr/local/bin/apktool
 
     - name: Set up Android SDK
-      uses: android-actions/setup-sdk@v3
+      uses: android-actions/setup-android@v3
       with:
-        build-tools: '34.0.0'
+        packages: 'platform-tools build-tools;34.0.0'
 
     - name: Decompile APK
       run: apktool d source_apk/ru.oneme.app.apk -f -o apk_workdir

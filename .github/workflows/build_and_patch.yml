@@ -30,6 +30,11 @@ jobs:
       with:
         packages: 'platform-tools build-tools;34.0.0'
 
+    # setup-android action doesnt add buildtools to the PATH, so we do manually
+    - name: Add Android Build Tools to PATH
+      run: echo "${ANDROID_HOME}/build-tools/34.0.0" >> $GITHUB_PATH
+      shell: bash
+
     - name: Decompile APK
       run: apktool d source_apk/ru.oneme.app.apk -f -o apk_workdir
 

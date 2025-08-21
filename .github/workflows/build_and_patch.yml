@@ -45,7 +45,7 @@ jobs:
     - name: Remove original signature
       run: |
         rm -rf apk_workdir/original/META-INF
-        rm -f apk_workdir/stamp-cert-sha256
+        rm -rf apk_workdir/unknown/stamp-cert-sha256
 
     - name: Rebuild APK
       run: apktool b apk_workdir -c -o rebuilt_unsigned.apk

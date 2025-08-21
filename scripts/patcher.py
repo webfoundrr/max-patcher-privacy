@@ -12,12 +12,12 @@ def apply_patches():
 
     all_smali_files = glob.glob(os.path.join(DECOMPILED_DIR, '**', '*.smali'), recursive=True)
 
-    for smali_file_path in all_smali_files:
+    for smali_fPath in all_smali_files:
         try:
-            with open(smali_file_path, 'r', encoding='utf-8') as f:
+            with open(smali_fPath, 'r', encoding='utf-8') as f:
                 target_content = f.read()
         except Exception as e:
-            print(f"Warning: Could not read {smali_file_path}: {e}")
+            print(f"Warning: Could not read {smali_fPath}: {e}")
             continue
 
         original_content = target_content
@@ -37,17 +37,17 @@ def apply_patches():
                 patched_block = f.read()
 
             if original_block in target_content:
-                print(f"  -> Found match for '{snippet_filename}' in '{os.path.basename(smali_file_path)}'. Applying patch.")
+                print(f"  -> Found match for '{snippet_filename}' in '{os.path.basename(smali_fPath)}'. Applying patch.")
                 target_content = target_content.replace(original_block, patched_block)
                 total_patches_applied += 1
 
         if original_content != target_content:
-            print(f"Writing changes to {smali_file_path}...")
+            print(f"Writing changes to {smali_fPath}...")
             try:
-                with open(smali_file_path, 'w', encoding='utf-8') as f:
+                with open(smali_fPath, 'w', encoding='utf-8') as f:
                     f.write(target_content)
             except Exception as e:
-                print(f"?? (Could not write to {smali_file_path}: {e})")
+                print(f"?? (Could not write to {smali_fPath}: {e})")
                 sys.exit(1)
 
 

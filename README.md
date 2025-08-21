@@ -1,5 +1,4 @@
-<img width="922" height="732" alt="2" src="https://github.com/user-attachments/assets/33ad225b-93b8-48a1-869b-61e50e1517f9" /># max-patcher-privacy - Патч для приватности
-
+# max-patcher-privacy - Патч для приватности
 Этот проект содержит автоматизированный патч для удаления шпионского SDK `my.tracker` (возможно и другие) из приложения max.
 
 ## О проекте

@@ -1,0 +1,8 @@
+.method public setGender(I)Lcom/my/tracker/MyTrackerParams;
+    .registers 2
+    .param p1, "v"    # I
+
+    .prologue
+    .line 1
+    return-object p0
+.end method

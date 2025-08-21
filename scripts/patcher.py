@@ -17,7 +17,7 @@ def apply_patches():
             with open(smali_fPath, 'r', encoding='utf-8') as f:
                 target_content = f.read()
         except Exception as e:
-            print(f"Warning: Could not read {smali_fPath}: {e}")
+            print(f"Warning: Couldnt read {smali_fPath}: {e}")
             continue
 
         original_content = target_content

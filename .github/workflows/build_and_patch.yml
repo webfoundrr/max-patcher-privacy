@@ -41,6 +41,12 @@ jobs:
     - name: Run Python Patcher
       run: python scripts/patcher.py
 
+    # prevents java.util.zip.ZipException: duplicate entry: stamp-cert-sha256
+    - name: Remove original signature
+      run: |
+        rm -rf apk_workdir/original/META-INF
+        rm -f apk_workdir/stamp-cert-sha256
+
     - name: Rebuild APK
       run: apktool b apk_workdir -c -o rebuilt_unsigned.apk
 

@@ -1,0 +1,52 @@
+#THIS IS FOR TESTING PURPOSES DO NOT RUN
+
+name: TESTING DO NOT RUN
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare output dir
+        run: mkdir -p source_apk
+
+      - name: Install apkeep
+        shell: bash
+        run: |
+          set -euxo pipefail
+          AKEEP_VERSION="0.12.0"
+          ARCHIVE="apkeep-v${AKEEP_VERSION}-x86_64-unknown-linux-musl.tar.xz"
+          URL="https://github.com/EFForg/apkeep/releases/download/v${AKEEP_VERSION}/${ARCHIVE}"
+          curl -L "$URL" -o apkeep.tar.xz
+          tar -xf apkeep.tar.xz
+          sudo mv apkeep /usr/local/bin/apkeep
+          apkeep --version
+
+      - name: Download APK (ru.oneme.app) into source_apk/
+        shell: bash
+        env:
+          PACKAGE_NAME: ru.oneme.app
+        run: |
+          set -euxo pipefail
+          apkeep -a "$PACKAGE_NAME" -o source_apk --source apkpure
+
+          echo "Downloaded files:"
+          ls -lh source_apk
+
+      - name: Tree
+        shell: bash
+        run: |
+          echo "Project structure:"
+          find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ru.oneme.app-apk
+          path: source_apk/

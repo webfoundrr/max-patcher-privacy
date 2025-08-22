@@ -1,0 +1,8 @@
+.method public final send(Lru/ok/android/externcalls/analytics/events/CallAnalyticsEvent;)V
+    .locals 0
+    .param p1, "event"    # Lru/ok/android/externcalls/analytics/events/CallAnalyticsEvent;
+
+    .prologue
+    .line 1
+    return-void
+.end method

@@ -1,0 +1,7 @@
+.method public final forceSendScheduledEvents()V
+    .locals 0
+
+    .prologue
+    .line 1
+    return-void
+.end method

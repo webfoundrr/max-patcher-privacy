@@ -32,7 +32,7 @@
 Я приложу скриншоты из JEB Pro, которые показывают код до и после применения патча на примере методов. Это наглядно демонстрирует, как опасный код заменяется на "пустышку".
 
 **До (Оригинальный код `MyTrackerParams`):**
-<img width="815" height="681" alt="1" src="https://github.com/user-attachments/assets/b652ac3e-9a76-47db-a669-70664df7c543" />
+<img width="1208" height="719" alt="1 (2)" src="https://github.com/user-attachments/assets/7a7cbc34-ef11-469c-87c9-b0b5658e63ae" />
 
 **После (Код после патча):**
 <img width="922" height="732" alt="2" src="https://github.com/user-attachments/assets/04bc0397-5158-4620-ace4-eb2616e56d4e" />

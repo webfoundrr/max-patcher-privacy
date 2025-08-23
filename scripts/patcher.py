@@ -1,12 +1,26 @@
 import os
 import glob
 import sys
+import argparse
 
 DECOMPILED_DIR = "apk_workdir"
 PATCHES_DIR = "patches"
 
-def apply_patches():
+# Experimental DB
+EXPERIMENTAL_SNIPPETS = [
+    "hm9_G_log_info_throwable.smali-snippet",
+    "hm9_H_log_info_format.smali-snippet",
+    "hm9_l_log_error_throwable.smali-snippet"
+    "hm9_m_log_debug_format.smali-snippet",
+    "hm9_N_log_dispatcher.smali-snippet",
+    "hm9_p_log_warn_throwable.smali-snippet",
+    "hm9_q_log_warn_format.smali-snippet",
+]
+
+
+def apply_patches(experimental=True):
     print("[I] Smali patching process...")
+    print(f"[I] Experimental mode: {'ON' if experimental else 'OFF'}")
 
     all_smali_files = glob.glob(os.path.join(DECOMPILED_DIR, '**', '*.smali'), recursive=True)
     print(f"[I] Found {len(all_smali_files)} .smali files under '{DECOMPILED_DIR}'.")
@@ -62,6 +76,31 @@ def apply_patches():
             'original': original_block,
             'patched': patched_block
         })
+
+    if EXPERIMENTAL_SNIPPETS:
+        filtered = []
+        skipped_experimental = []
+        included_experimental = []
+        for pair in patch_pairs:
+            is_experimental = pair['name'] in EXPERIMENTAL_SNIPPETS
+            if is_experimental and not experimental:
+                skipped_experimental.append(pair['name'])
+                continue
+            if is_experimental and experimental:
+                included_experimental.append(pair['name'])
+            filtered.append(pair)
+        patch_pairs = filtered
+
+        if experimental:
+            if included_experimental:
+                print(f"[I] Including experimental patches ({len(set(included_experimental))}): {', '.join(sorted(set(included_experimental)))}")
+            else:
+                print("[I] No experimental patch pair names matched the DB")
+        else:
+            if skipped_experimental:
+                print(f"[I] Skipping experimental patches ({len(set(skipped_experimental))}): {', '.join(sorted(set(skipped_experimental)))}")
+            else:
+                print("[I] No experimental patch pair names to skip")
 
     print(f"[I] Matched patch pairs ready: {len(patch_pairs)}")
 
@@ -141,5 +180,17 @@ def apply_patches():
     return None
 
 
+def _to_bool(val) -> bool:
+    return str(val).strip().lower() in ("1", "true", "yes", "y", "on")
+
+
 if __name__ == "__main__":
-    apply_patches()
+    parser = argparse.ArgumentParser(description="Smali patcher")
+    parser.add_argument(
+        "--experimental",
+        default=os.getenv("EXPERIMENTAL", "true"),
+        help="Enable experimental patches (true/false). Can also be set via EXPERIMENTAL env var."
+    )
+    args = parser.parse_args()
+    experimental_flag = _to_bool(args.experimental)
+    apply_patches(experimental=experimental_flag)

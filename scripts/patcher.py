@@ -14,7 +14,7 @@ EXPERIMENTAL_SNIPPETS = [
     "hm9_m_log_debug_format.smali-snippet",
     "hm9_N_log_dispatcher.smali-snippet",
     "hm9_p_log_warn_throwable.smali-snippet",
-    "hm9_q_log_warn_format.smali-snippet",
+    "hm9_q_log_warn_format.smali-snippet"
 ]
 
 

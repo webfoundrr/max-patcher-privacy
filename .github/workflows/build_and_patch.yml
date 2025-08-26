@@ -49,6 +49,13 @@ jobs:
       env:
         EXPERIMENTAL: ${{ inputs.experimental }}
 
+    - name: Modify build.gradle to disable splits
+      run: |
+        if [ -f "apk_workdir/res/values/strings.xml" ]; then
+          echo "Removing split references..."
+         sed -i 's/<application/<application android:isSplitRequired="false"/' apk_workdir/AndroidManifest.xml
+        fi
+
     # prevents java.util.zip.ZipException: duplicate entry: stamp-cert-sha256
     - name: Remove original signature
       run: |
